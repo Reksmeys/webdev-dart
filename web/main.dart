@@ -6,6 +6,9 @@ final InputElement fullname = querySelector('#fullname') as InputElement;
 final InputElement age = querySelector('#age') as InputElement;
 final ButtonElement submit = querySelector('#submit') as ButtonElement;
 
+
+
+
 void main() {
   querySelector("#getUsers")!.onClick.listen(fetchUsers);
 
@@ -14,9 +17,7 @@ void main() {
 
 Future<void> insertUsers(Event e) async {
   e.preventDefault();
-
   const insertURL = 'http://localhost:9090/users/create';
-
   try {
     var request = HttpRequest();
     request
@@ -34,7 +35,6 @@ Future<void> insertUsers(Event e) async {
 
 Future<void> fetchUsers(Event _) async {
   const path = 'http://localhost:9090/users';
-
   try {
     // Make the GET request
     final jsonString = await HttpRequest.getString(path);
@@ -43,7 +43,7 @@ Future<void> fetchUsers(Event _) async {
     final myUsers = await json.decode(jsonString);
     for (final userData in myUsers['data']) {
       userCard.appendHtml("""
-          <div class="col-3">
+          <div class="col-md-4 col-lg-3 col-sm-6">
                <div class="card mt-5" style="width: 18rem;">
                 <div class="card-body">
                   <h5 class="card-title">${userData['name']}</h5>
